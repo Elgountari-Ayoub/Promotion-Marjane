@@ -12,12 +12,7 @@ export class DashboardComponent implements OnInit{
   currentPage: number = 1;
 
   constructor(private promotionService: PromotionService) {
-    // Fetch promotions from a service (replace with actual service)
-    this.promotionService.getAllPromotionsByManager().subscribe((data) => {
-      this.promotions = data;
-    });
   }
-
   ngOnInit(): void {
     this.loadPromotions();
   }
@@ -25,7 +20,7 @@ export class DashboardComponent implements OnInit{
   loadPromotions() {
     this.promotionService.getAllPromotionsByManager().subscribe(
       data => {
-        console.log(data);
+        console.log(data[0]);
         
         this.promotions = data;
       },

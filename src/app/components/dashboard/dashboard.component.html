@@ -5,15 +5,23 @@
     <table class="min-w-full border border-collapse">
       <thead>
         <tr>
-          <th class="p-3 text-left">Title</th>
-          <th class="p-3 text-left">Description</th>
+          <th class="p-3 text-left">Product</th>
+          <th class="p-3 text-left">Category</th>
+          <th class="p-3 text-left">Center</th>
+          <th class="p-3 text-left">Start At</th>
+          <th class="p-3 text-left">End At</th>
+          <th class="p-3 text-left">Status</th>
           <th class="p-3 text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let promotion of promotions | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-          <td class="p-3 border">{{ promotion.title }}</td>
-          <td class="p-3 border">{{ promotion.description }}</td>
+          <td class="p-3 border">{{ promotion.productPromotion.product.name }}</td>
+          <td class="p-3 border">{{ promotion.productPromotion.product.category.name }}</td>
+          <td class="p-3 border">{{ promotion.center.name }}</td>
+          <td class="p-3 border">{{ promotion.productPromotion.startAt }}</td>
+          <td class="p-3 border">{{ promotion.productPromotion.endAt }}</td>
+          <td class="p-3 border">{{ promotion.status }}</td>
           <td class="p-3 text-center border">
             <button (click)="acceptPromotion(promotion)" class="bg-green-500 text-white px-4 py-2 mr-2">Accept</button>
             <button (click)="refusePromotion(promotion)" class="bg-red-500 text-white px-4 py-2">Refuse</button>
