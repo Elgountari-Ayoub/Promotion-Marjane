@@ -23,8 +23,8 @@
           <td class="p-3 border">{{ promotion.productPromotion.endAt }}</td>
           <td class="p-3 border">{{ promotion.status }}</td>
           <td class="p-3 text-center border">
-            <button (click)="acceptPromotion(promotion)" class="bg-green-500 text-white px-4 py-2 mr-2">Accept</button>
-            <button (click)="refusePromotion(promotion)" class="bg-red-500 text-white px-4 py-2">Refuse</button>
+            <button (click)="acceptPromotion(promotion.id)" class="bg-green-500 text-white px-4 py-2 mr-2">Accept</button>
+            <button (click)="refusePromotion(promotion.id)" class="bg-red-500 text-white px-4 py-2">Refuse</button>
           </td>
         </tr>
       </tbody>

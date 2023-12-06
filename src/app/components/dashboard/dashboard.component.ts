@@ -6,37 +6,50 @@ import { PromotionService } from 'src/app/services/promotion.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   promotions: any[] = []; // Replace with actual promotion model
   pageSize: number = 7;
   currentPage: number = 1;
 
-  constructor(private promotionService: PromotionService) {
-  }
+  constructor(private promotionService: PromotionService) {}
   ngOnInit(): void {
     this.loadPromotions();
   }
 
   loadPromotions() {
     this.promotionService.getAllPromotionsByManager().subscribe(
-      data => {
-        console.log(data[0]);
-        
+      (data) => {
+        console.log(data);
+
         this.promotions = data;
       },
-      error => {
+      (error) => {
         console.error('Error fetching promotions:', error);
       }
     );
   }
 
-  acceptPromotion(promotion: any) {
-    // Logic to accept promotion
-    console.log('Accepted:', promotion);
+  acceptPromotion(promotionCenterId: any) {
+    this.promotionService.acceptPromotion(promotionCenterId).subscribe(
+      (result) => {
+        console.log('Promotion accepted:', result);
+        this.loadPromotions();
+      },
+      (error) => {
+        console.error('Error refusing promotion:', error);
+      }
+    );
   }
 
-  refusePromotion(promotion: any) {
-    // Logic to refuse promotion
-    console.log('Refused:', promotion);
+  refusePromotion(promotionCenterId: any) {
+    this.promotionService.refusePromotion(promotionCenterId).subscribe(
+      (result) => {
+        console.log('Promotion refused:', result);
+        this.loadPromotions();
+      },
+      (error) => {
+        console.error('Error refusing promotion:', error);
+      }
+    );
   }
 }

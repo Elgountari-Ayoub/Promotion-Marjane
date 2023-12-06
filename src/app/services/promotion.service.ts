@@ -11,9 +11,15 @@ export class PromotionService {
   constructor(private http: HttpClient) { }
 
   getAllPromotionsByManager(): Observable<any[]> {
-    // Replace 'DQ456865' with the actual manager CIN
-    // const managerCIN = 'HHm0';
-
     return this.http.get<any[]>(`${this.apiUrl}/managers/promotions`);
   }
+  refusePromotion(promotionCenterId: any): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/managers/promotions/refuse`, promotionCenterId);
+  }
+  acceptPromotion(promotionCenterId: any): Observable<boolean> {
+    console.log(promotionCenterId);
+    
+    return this.http.post<boolean>(`${this.apiUrl}/managers/promotions/accept`, promotionCenterId);
+  }
+
 }
