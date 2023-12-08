@@ -8,25 +8,32 @@ import { PromotionService } from 'src/app/services/promotion.service';
 })
 export class DashboardComponent implements OnInit {
   promotions: any[] = []; // Replace with actual promotion model
-  pageSize: number = 7;
-  currentPage: number = 1;
+  page: number = 0;
+  size: number = 5;
 
   constructor(private promotionService: PromotionService) {}
   ngOnInit(): void {
     this.loadPromotions();
   }
 
-  loadPromotions() {
-    this.promotionService.getAllPromotionsByManager().subscribe(
-      (data) => {
-        console.log(data);
-
-        this.promotions = data;
-      },
-      (error) => {
-        console.error('Error fetching promotions:', error);
-      }
-    );
+  loadPromotions(page: number = 0, size: number = 5) {
+    this.page = page;
+    this.size = size;
+    console.log(page);
+    console.log(size);
+        
+    this.promotionService
+      .getAllPromotionsByManager(page, size)
+      .subscribe(
+        (data: any) => {
+          
+          this.promotions = (data as any).content;;
+          console.log(this.promotions);
+        },
+        (error) => {
+          console.error('Error fetching promotions:', error);
+        }
+      );
   }
 
   acceptPromotion(promotionCenterId: any) {

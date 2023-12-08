@@ -16,13 +16,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let promotion of promotions | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+        <tr *ngFor="let promotion of promotions">
           <td class="p-3 border">{{ promotion.productPromotion.product.name }}</td>
           <td class="p-3 border">{{ promotion.productPromotion.product.category.name }}</td>
           <td class="p-3 border">{{ promotion.center.name }}</td>
           <td class="p-3 border">{{ promotion.productPromotion.percentage }} %</td>
           <td class="p-3 border">{{ promotion.productPromotion.startAt | date : 'yyyy-mm-dd' }}</td>
-          <td class="p-3 border">{{ promotion.productPromotion.endAt }}</td>
+          <td class="p-3 border">{{ promotion.productPromotion.endAt | date : 'yyyy-mm-dd' }}</td>
           <td class="p-3 border">{{ promotion.status }}</td>
           <td class="p-3 text-center border" *ngIf="promotion.status == 'PENDING'">
             <button (click)="acceptPromotion(promotion.id)" class="bg-green-500 text-white px-4 py-2 mr-2">Accept</button>
@@ -31,8 +31,15 @@
         </tr>
       </tbody>
     </table>
+
+    <ng-template #noPromotions>
+      <p class="text-gray-500">No promotions available.</p>
+    </ng-template>
   
-    <!-- Pagination controls -->
-    <pagination-controls (pageChange)="currentPage = $event" class="mt-4"></pagination-controls>
+    <div class="pagination">
+    <button (click)="loadPromotions(page - 1)" [disabled]="page === 0" class="btn bg-gray-500 text-white p-1 mx-2">Previous</button>
+      <span>Page {{ page + 1 }}</span>
+      <button (click)="loadPromotions(page + 1)" [disabled]="page === size - 1" class="btn bg-gray-500 text-white p-1 mx-2">Next</button>
+    </div>
   </div>
   
