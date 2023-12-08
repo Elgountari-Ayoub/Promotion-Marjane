@@ -30,5 +30,13 @@ export class PromotionService {
       `${this.apiUrl}/managers/promotions/accept`,
       promotionCenterId
     );
+
+
   }
+
+  getStatistics(): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl}/managers/statistics`);
+  }
+
+  
 }

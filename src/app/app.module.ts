@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/includes/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, StatisticsComponent],
+  declarations: [AppComponent, DashboardComponent, StatisticsComponent, NavbarComponent],
   imports: [BrowserModule, AppRoutingModule, NgxPaginationModule, HttpClientModule, BrowserAnimationsModule, MatSlideToggleModule],
   providers: [],
   bootstrap: [AppComponent],

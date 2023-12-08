@@ -1,45 +1,88 @@
 <!-- dashboard.component.html -->
 <div class="container mx-auto my-4">
-    <h2 class="text-2xl font-semibold mb-4">Promotions Dashboard</h2>
-  
-    <table class="min-w-full border border-collapse">
-      <thead>
-        <tr>
-          <th class="p-3 text-left">Product</th>
-          <th class="p-3 text-left">Category</th>
-          <th class="p-3 text-left">Center</th>
-          <th class="p-3 text-left">Percentage</th>
-          <th class="p-3 text-left">Start At</th>
-          <th class="p-3 text-left">End At</th>
-          <th class="p-3 text-left">Status</th>
-          <th class="p-3 text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let promotion of promotions">
-          <td class="p-3 border">{{ promotion.productPromotion.product.name }}</td>
-          <td class="p-3 border">{{ promotion.productPromotion.product.category.name }}</td>
-          <td class="p-3 border">{{ promotion.center.name }}</td>
-          <td class="p-3 border">{{ promotion.productPromotion.percentage }} %</td>
-          <td class="p-3 border">{{ promotion.productPromotion.startAt | date : 'yyyy-mm-dd' }}</td>
-          <td class="p-3 border">{{ promotion.productPromotion.endAt | date : 'yyyy-mm-dd' }}</td>
-          <td class="p-3 border">{{ promotion.status }}</td>
-          <td class="p-3 text-center border" *ngIf="promotion.status == 'PENDING'">
-            <button (click)="acceptPromotion(promotion.id)" class="bg-green-500 text-white px-4 py-2 mr-2">Accept</button>
-            <button (click)="refusePromotion(promotion.id)" class="bg-red-500 text-white px-4 py-2">Refuse</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2 class="text-2xl font-semibold mb-4">Promotions Dashboard</h2>
 
-    <ng-template #noPromotions>
-      <p class="text-gray-500">No promotions available.</p>
-    </ng-template>
-  
-    <div class="pagination">
-    <button (click)="loadPromotions(page - 1)" [disabled]="page === 0" class="btn bg-gray-500 text-white p-1 mx-2">Previous</button>
-      <span>Page {{ page + 1 }}</span>
-      <button (click)="loadPromotions(page + 1)" [disabled]="page === size - 1" class="btn bg-gray-500 text-white p-1 mx-2">Next</button>
-    </div>
+  <table class="min-w-full border border-collapse">
+    <thead>
+      <tr>
+        <th class="p-3 text-left">Product</th>
+        <th class="p-3 text-left">Category</th>
+        <th class="p-3 text-left">Center</th>
+        <th class="p-3 text-left">Percentage</th>
+        <th class="p-3 text-left">Start At</th>
+        <th class="p-3 text-left">End At</th>
+        <th class="p-3 text-left">Status</th>
+        <th class="p-3 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promotion of promotions">
+        <td class="p-3 border">
+          {{ promotion.productPromotion.product.name }}
+        </td>
+        <td class="p-3 border">
+          {{ promotion.productPromotion.product.category.name }}
+        </td>
+        <td class="p-3 border">{{ promotion.center.name }}</td>
+        <td class="p-3 border">
+          {{ promotion.productPromotion.percentage }} %
+        </td>
+        <td class="p-3 border">
+          {{ promotion.productPromotion.startAt | date : "yyyy-mm-dd" }}
+        </td>
+        <td class="p-3 border">
+          {{ promotion.productPromotion.endAt | date : "yyyy-mm-dd" }}
+        </td>
+        <!-- <td class="p-3 border">{{ promotion.status }}</td> -->
+        <td
+          class="p-3 border 
+        {{ promotion.status === 'ACCEPTED' ? 'text-green-500' : '' }}
+        {{ promotion.status === 'PENDING' ? 'text-yellow-500' : '' }}
+        {{ promotion.status === 'REFUSED' ? 'text-red-500' : '' }}"
+        >
+          {{ promotion.status }}
+        </td>
+
+        <td
+          class="p-3 text-center border"
+          *ngIf="promotion.status == 'PENDING'"
+        >
+          <button
+            (click)="acceptPromotion(promotion.id)"
+            class="bg-green-500 text-white px-4 py-2 mr-2"
+          >
+            Accept
+          </button>
+          <button
+            (click)="refusePromotion(promotion.id)"
+            class="bg-red-500 text-white px-4 py-2"
+          >
+            Refuse
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noPromotions>
+    <p class="text-gray-500">No promotions available.</p>
+  </ng-template>
+
+  <div class="pagination">
+    <button
+      (click)="loadPromotions(page - 1)"
+      [disabled]="page === 0"
+      class="btn bg-gray-500 text-white p-1 mx-2"
+    >
+      Previous
+    </button>
+    <span>Page {{ page + 1 }}</span>
+    <button
+      (click)="loadPromotions(page + 1)"
+      [disabled]="page === size - 1"
+      class="btn bg-gray-500 text-white p-1 mx-2"
+    >
+      Next
+    </button>
   </div>
-  
+</div>
